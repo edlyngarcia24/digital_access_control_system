@@ -8,10 +8,10 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
---use IEEE.NUMERIC_STD.ALL;
+
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
-
+--use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
@@ -33,7 +33,6 @@ entity DACS_source_1 is
 end DACS_source_1;
 
 architecture Behavioral of DACS_source_1 is
-
    
     -- Stored password = 1011
     constant STORED_PASSWORD : STD_LOGIC_VECTOR(3 downto 0) := "1011";
@@ -90,11 +89,7 @@ begin
     -- PASSWORD COMPARATOR
     -- This checks whether passcode = STORED_PASSWORD
  
-    match <=
-        ((passcode(3) and STORED_PASSWORD(3)) or ((not passcode(3)) and (not STORED_PASSWORD(3))))
-    and ((passcode(2) and STORED_PASSWORD(2)) or ((not passcode(2)) and (not STORED_PASSWORD(2))))
-    and ((passcode(1) and STORED_PASSWORD(1)) or ((not passcode(1)) and (not STORED_PASSWORD(1))))
-    and ((passcode(0) and STORED_PASSWORD(0)) or ((not passcode(0)) and (not STORED_PASSWORD(0))));
+ match <= '1' when passcode = STORED_PASSWORD else '0';
 
   
     -- ENTER BUTTON EDGE DETECTION
@@ -260,7 +255,7 @@ begin
     -- 1
     -- 2
     -- 3
-   segment_num_logic: process(q1, q0)
+segment_num_logic: process(q1, q0)
 begin
     if q1 = '0' and q0 = '0' then
         -- 0
@@ -276,6 +271,7 @@ begin
         seg_num <= "0000110";
     end if;
 end process;
+
 
     -- ACTIVE-LOW "L"
     -- L = d e f on
@@ -296,3 +292,4 @@ end process;
 
 
 end Behavioral;
+
