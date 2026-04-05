@@ -8,7 +8,7 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
+--use IEEE.NUMERIC_STD.ALL;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 
@@ -260,24 +260,22 @@ begin
     -- 1
     -- 2
     -- 3
-    segment_num_logic: process(q1, q0)
-    begin
-        case (q1 & q0) is
-            when "00" =>
-                -- 0
-                seg_num <= "0000001";
-            when "01" =>
-                -- 1
-                seg_num <= "1001111";
-            when "10" =>
-                -- 2
-                seg_num <= "0010010";
-            when others =>
-                -- 3
-                seg_num <= "0000110";
-        end case;
-    end process;
-
+   segment_num_logic: process(q1, q0)
+begin
+    if q1 = '0' and q0 = '0' then
+        -- 0
+        seg_num <= "0000001";
+    elsif q1 = '0' and q0 = '1' then
+        -- 1
+        seg_num <= "1001111";
+    elsif q1 = '1' and q0 = '0' then
+        -- 2
+        seg_num <= "0010010";
+    else
+        -- 3
+        seg_num <= "0000110";
+    end if;
+end process;
 
     -- ACTIVE-LOW "L"
     -- L = d e f on
