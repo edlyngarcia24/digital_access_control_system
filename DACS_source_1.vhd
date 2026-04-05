@@ -8,10 +8,10 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
+use IEEE.NUMERIC_STD.ALL;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
@@ -23,7 +23,7 @@ entity DACS_source_1 is
            reset : in STD_LOGIC;
            enter : in STD_LOGIC;
            passcode : in STD_LOGIC_VECTOR (3 downto 0);
-           acess_granted : out STD_LOGIC;
+           access_granted : out STD_LOGIC;
            access_denied : out STD_LOGIC;
            buzzer : out STD_LOGIC;
            lock : out STD_LOGIC;
@@ -34,7 +34,6 @@ end DACS_source_1;
 
 architecture Behavioral of DACS_source_1 is
 
-begin
    
     -- Stored password = 1011
     constant STORED_PASSWORD : STD_LOGIC_VECTOR(3 downto 0) := "1011";
